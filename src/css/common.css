@@ -16,3 +16,30 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  align-items: center;
+  background-color: #ffd54f;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 80px;
+}
+
+.field {
+  display: inline-block;
+  font-size: 3.5em;
+  text-transform: uppercase;
+}
+
+.value {
+  display: inline-block;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+
+.label {
+  display: block;
+  font-size: 1.5rem;
+}
