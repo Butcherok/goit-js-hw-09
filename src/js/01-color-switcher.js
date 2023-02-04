@@ -10,6 +10,8 @@ let intervalChangeColor = null;
 startBtn.addEventListener('click', onChangeColor);
 stopBtn.addEventListener('click', onStopedChanges);
 
+stopBtn.disabled = true;
+
 function onChangeColor () {
     startBtn.disabled = true;
     stopBtn.disabled = false;
