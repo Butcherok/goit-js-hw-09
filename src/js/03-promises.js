@@ -42,7 +42,7 @@ function isReject(position, delay) {
 function amountTimes() {
   const amount = inputData.amount;
   delay = Number(inputData.delay);
-    for(var i = 0; i < amount; i += 1){
+    for(let i = 0; i < amount; i += 1){
       position = i + 1;
       delay = Number(inputData.delay) + Number(inputData.step)*i;
       createPromise(position, delay)
