@@ -1,7 +1,6 @@
 import Notiflix from 'notiflix';
 
 const form = document.querySelector('.form');
-console.log(form);
 
 form.addEventListener('input', onInputData);
 form.addEventListener('submit', onSubmitForm);
@@ -48,7 +47,6 @@ function amountTimes() {
       delay = Number(inputData.delay) + Number(inputData.step)*i;
       createPromise(position, delay)
       .then(({ position, delay }) => {
-        // Notiflix.Notify.closeButton = true
         isFulfill(position, delay);
       })
       .catch(({ position, delay }) => {
