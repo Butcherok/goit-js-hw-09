@@ -7,7 +7,7 @@ form.addEventListener('input', onInputData);
 form.addEventListener('submit', onSubmitForm);
 
 let inputData = {};
-let position = 0;
+let position = null;
 let delay = null;
 
 function onInputData(evt) {
@@ -17,7 +17,6 @@ function onInputData(evt) {
 function onSubmitForm(evt) {
   evt.preventDefault();
   amountTimes();
-  form.reset();
 }
 
 function createPromise(position, delay) {
@@ -25,9 +24,9 @@ function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(isFulfill(position, delay));
+        resolve({position, delay});
       } else {
-        reject(isReject(position, delay));
+        reject({position, delay});
       }
     }, delay);
   }); 
@@ -41,14 +40,18 @@ function isReject(position, delay) {
   Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
 }
 
-
-
 function amountTimes() {
   const amount = inputData.amount;
   delay = Number(inputData.delay);
     for(var i = 0; i < amount; i += 1){
-      position += 1;
-      delay = Number(inputData.delay) + Number(inputData.step)*(position - 1);
-      createPromise(position, delay);
-    };
+      position = i + 1;
+      delay = Number(inputData.delay) + Number(inputData.step)*i;
+      createPromise(position, delay)
+      .then(({ position, delay }) => {
+        // Notiflix.Notify.closeButton = true
+        isFulfill(position, delay);
+      })
+      .catch(({ position, delay }) => {
+        isReject(position, delay);
+      });    };
 }
